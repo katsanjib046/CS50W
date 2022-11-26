@@ -1,0 +1,89 @@
+body {
+    font-family: Futura, Trebuchet MS, Arial, san-serif;
+    color: #202124;
+  }
+
+.searchbar {
+    border-color: #888888;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    display: block;
+    margin: 10px;
+    padding: 10px;
+    width: 500px;  
+  }
+
+  .searchbutton {
+    background-color: #F8F9FA;
+    border-style: none;
+    margin: 11px 4px;
+    padding: 8px 16px;
+  }
+
+  .navbar {
+    text-align: right;
+  }
+
+  .vertical-center {
+    margin-top: 150px;
+  }
+
+  .vertical-center .logo-subtext {
+    color: #4285f4;
+    position: relative;
+    left: 110px;
+    top: -18px;
+  }
+
+  .navbar li {
+    display: inline-block;
+    padding: 10px;
+  }
+
+  .navbar a {
+    color: #202124;
+  }
+
+  .navbar a, .navbar a:active, .navbar a:hover, .navbar a:visited {
+    text-decoration: none;
+  }
+
+  .navbar a:active, .navbar a:hover {
+    text-decoration: underline;
+  }
+
+  .text-input-table {
+    margin: 15px 45px;
+  }
+
+  .text-input-table tr {
+    font-size: 10pt;
+  }
+
+  .text-input-table tr td .searchbutton {
+    float: right;
+    background-color: #4D90FE;
+    color: #FFFFFF;
+  }
+
+  h3 {
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    color: #f90000;
+    margin: 30px 0px 10px 47px;
+    font-size: 16pt;
+    font-weight: 450;
+  }
+
+  .searchbar-as {
+    border-radius: 1px;
+    display: block;
+    margin: 7px;
+    padding: 7px;
+    width: 500px;
+  }
+
+  #logo {
+    height: 20px;
+  }
+

@@ -1,0 +1,31 @@
+textarea {
+    min-height: 400px;
+}
+
+.space-read, .space-unread {
+    background-color: #ffffff;
+    border-color: #777777;
+    border-style: solid;
+    border-radius: 25px;
+    border-width: 1px;
+    margin-top: 2px;
+    padding: 8px;
+}
+
+.space-unread {
+    background-color: #eeeeee;
+    font-weight: bold;
+}
+
+.space-read:hover, .space-unread:hover {
+    background-color: #f7e2e2;
+}
+
+.space-read .timestamp, .space-unread .timestamp {
+    text-align: right;
+    float: right;
+}
+
+body {
+    background-color: #dbf0fe;
+}

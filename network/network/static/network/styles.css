@@ -1,0 +1,20 @@
+.avatar-img {
+    border-radius: 50%;;
+}
+
+body {
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+
+.edit {
+    background-color: #f8f8f8;
+    border: 0cm;
+    font-size: small;
+    color: rgb(61, 141, 150);
+}
+
+.edit:hover {
+    background-color: #f2cdcd;
+    border: 0.1cm;
+}

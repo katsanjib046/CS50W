@@ -1,0 +1,107 @@
+{% extends "auctions/layout.html" %}
+
+{% block title%}
+{{item.listing_name}}
+{% endblock title%}
+
+{% block heading %}{{ item.listing_name }}{% endblock heading%}
+
+{%block body %}
+
+<div class="container">
+    <div class="row row-cols-2">
+      <div class="col">
+
+        <img src="{{item.image}}" alt="{{item.listing_name}}" height="300"/>
+      </div>
+      <div class="col">
+        <p>Starting Bid: ${{ item.starting_bid}}</p>
+        {% if message_s %}
+            <div class="alert alert-success" role="alert">
+                {{message_s}}
+              </div>
+              {%endif%}
+        <p style="color: green; font-weight: bold;">Current Bid: ${{ bids.last.bid_amount}}</p>
+<p>Sold By: {{ item.seller}}</p>
+<p>Listed on: {{item.created_at}}</p>
+<p>Category: {{item.category}} </p>
+<p> Description: {{item.description}}</p>
+{% if not item.active %}
+<div class="alert alert-danger" role="alert">Sorry! Auction has Closed!</div>
+<div class="alert alert-success" role="alert"> Won by @{{bids.last.bidder.username}}</div>
+{% endif %}
+      </div>
+    </div>
+  </div>
+<hr>
+{% if item.active %}
+  <div class="container">
+    <div class="row row-cols-2">
+      <div class="col">Bid $:
+        <form action="{% url 'listing' item.id %}" method="POST">
+            {% csrf_token %}
+            {% if message_w %}
+            <div class="alert alert-warning" role="alert">
+                {{message_w}}
+              </div>
+                
+            {% endif %}
+            {% if item.current_bid %}
+            <input type="number" step="0.01" min="{{bids.bid.bid_amount}}" placeholder="Greater than {{item.current_bid}}" name="bid_amount">
+            {%else%}
+            <input type="number" step="0.01" min="{{item.starting_bid}}" placeholder="Greater than {{item.starting_bid}}" name="bid_amount">
+            {% endif%}
+            <input type="submit">
+        </form>
+
+      </div>
+      
+      {%if user == item.seller%}
+      <div class="col">
+        <form action="{% url 'listing' item.id %}" method="POST">
+            {%csrf_token%}
+            <input type="hidden" name="auctionClose">
+        <button type="submit" class="btn btn-danger">Close this Auction!</button>
+        </form>
+    </div>
+      {% else%}
+
+    {% if item in watched %}
+    <div class="col">
+      <form action="{% url 'watchlist' %}" method="POST">
+        {% csrf_token %}
+      <button name="watchUnlist" type="submit" class="btn btn-warning" value="{{item.id}}">Remove it from Watchlist.</button>
+      </form>
+    {% else %}
+      <div class="col">
+        <form action="{% url 'watchlist' %}" method="POST">
+          {% csrf_token %}
+        <button name="watchlist" type="submit" class="btn btn-primary" value="{{item.id}}">Put it in my watchlist.</button>
+        </form>
+        {%endif%}
+        
+
+    </div>
+      {% endif %}
+      
+    </div>
+  </div>
+  {% endif %}
+  <hr>
+  <hr>
+
+  <h3>Comments:</h3>
+  {% for comment in comments%}
+  <h6>{{comment.comment}}</h6> by @{{comment.comment_by}} <small> {{comment.comment_at|timesince}} ago </small>
+  <hr>
+  {% endfor %}
+
+  <form action="{% url 'listing' item.id %}" method="POST">
+    {% csrf_token %}
+  <div class="hstack gap-3">
+    <input name="newComment" class="form-control me-auto" type="text" placeholder="Write your comment here..." aria-label="Write your comment here...">
+    <input type="submit">
+  </div>
+</form>
+
+{% endblock%}

@@ -1,0 +1,32 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+Watchlist
+{% endblock title%}
+
+{% block heading %}
+Watchlist for @{{user.username}}
+{% endblock heading%}
+
+
+{% block body %}
+
+<div class="container text-center">
+    <div class="row row-cols-2">
+
+{% for item in watched %}
+
+<div class="col">
+<div class="card" style="width: 18rem;">
+    <img src="{{item.image}}" class="card-img-top" alt="{{item.listing_name}}" height="300">
+    <div class="card-body">
+      <a href="{% url 'listing' item.id %}" class="btn btn-primary">Go to {{item.listing_name}}</a>
+    </div>
+  </div>
+
+
+</div>
+{% endfor %}
+</div>
+</div>
+
+{%endblock body%}

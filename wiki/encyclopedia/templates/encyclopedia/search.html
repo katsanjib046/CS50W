@@ -1,0 +1,18 @@
+{% extends 'encyclopedia/layout.html' %}
+
+{% block title %}
+Search
+{% endblock title %}
+
+{% block body %}
+
+<h4>
+    Sorry!<br>
+ We couldn't find an entry for {{ title }}.<br>
+The following is a list of relevant entries.
+</h4>
+<hr>
+{% for entry in relevant_entries%}
+<a href="{% url 'entries' entry%}"><h5>{{entry}}<h5></a>
+{% endfor %}
+{% endblock body%}

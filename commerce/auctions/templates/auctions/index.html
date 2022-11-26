@@ -1,0 +1,41 @@
+{% extends "auctions/layout.html" %}
+
+{% block title%}
+Auction
+{% endblock title%}
+
+{% block heading %}Active Listings{% endblock heading%}
+{% block body %}
+
+
+    <div class="container text-center">
+        <div class="row row-cols-3">
+            {% for item in listing %}
+          <div class="col">
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{item.id}}" aria-expanded="false" aria-controls="collapseExample">
+                 {{ item.listing_name}}
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample{{item.id}}">
+            <div class="card card-body">
+                <p>Item: {{ item.listing_name}}</p>
+                <p>Starting Bid: ${{ item.starting_bid}}</p>
+                {% comment %} <p>Sold By: {{ item.seller}}</p> {% endcomment %}
+                {% comment %} <p>Listed on: {{item.created_at}}</p> {% endcomment %}
+                <p>Category: {{item.category}} </p>
+                <p> Description: {{item.description}}
+                <a href="{% url "listing" item.id %}"><p> Take me to this item!</p></a>
+            </div>
+        </div>
+        <p>
+            <img src="{{item.image}}" alt="{{item.listing_name}}" height="200"/></p>
+            <br>
+    
+        <p>
+          </div>
+       
+        {% endfor %}
+    </div>
+      </div>
+
+{% endblock %}

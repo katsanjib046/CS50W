@@ -1,0 +1,45 @@
+{% extends "network/layout.html" %}
+
+{% block title%}
+Profile
+{% endblock title %}
+
+{% block body %}
+<div style="text-align: center;">
+<img src="{{ profilePerson.avatar.url }}" alt-text="profile-{{profilePerson.username}}" height="100">
+    <h2>@{{profilePerson.username}}</h2>
+    <small> <b>{{followersCount}}</b> Followers <b>{{followingCount}}</b>  Following</small>
+{% if user.is_authenticated%}
+    {% if user.username != profilePerson.username %}
+    {% if not followValue %}
+    <form action="{% url 'network:profile' profilePerson.id %}" method="POST">
+    <input class="btn btn-primary" type="submit" value="Follow">
+    {% csrf_token %}
+    </form>
+    {% else %}
+    <form action="{% url 'network:profile' profilePerson.id %}" method="POST">
+        <input class="btn btn-primary" type="submit" value="Unfollow">
+        {% csrf_token %}
+        </form>
+    {%endif%}
+    {% endif %}
+{% endif %}
+</div>
+<h2>Recent Posts by @{{profilePerson.username}}</h2>
+<hr>
+    {% for post in posts %}
+    <a href={% url 'network:profile' post.postBy.id %}>
+    <img class="avatar-img" src="{{ post.postBy.avatar.url }}" alt-text="profile-{{post.postBy.username}}" height="35">
+    @<b>{{post.postBy.username}}</b>
+    </a><br>
+    <span id="content-{{post.id}}">{{post.postContent}} </span>
+    {% if user.id == post.postBy.id %}
+    <button class="edit" data-id="{{post.id}}" >Edit</button>
+    {% endif %}
+    <br>
+    <small>{{post.postTime|timesince}} ago</small><br>
+    <img src="/media/like.jpg" alt-text="Like" height="40" class="like" data-id="{{post.id}}"><span id="like-{{post.id}}">{{post.like_set.count}}</span>
+    <img src="/media/dislike.png" alt-text="Like" height="25" class="dislike" data-id="{{post.id}}"><span id="dislike-{{post.id}}">{{post.dislike_set.count}}</span>
+    <hr>
+    {% endfor %}
+{% endblock body%}

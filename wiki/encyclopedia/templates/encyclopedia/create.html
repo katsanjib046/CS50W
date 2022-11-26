@@ -1,0 +1,16 @@
+{% extends 'encyclopedia/layout.html' %}
+{% block title %}
+Create
+{% endblock title %}
+{% block body %}
+<h3>Please create a new entry below:</h3><hr>
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+<form action="{% url 'create' %}" method="POST">
+{% csrf_token %}
+Title: {{ form.title }}<br>
+Body:<br> {{ form.body }}<br>
+<input type="submit">
+</form>
+{% endblock body%}
